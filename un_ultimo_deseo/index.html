@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Algo especial para ti</title>
+  <style>
+    :root {
+      --primary: #ff4d6d;
+      --secondary: #ff758f;
+      --bg: #fff0f6;
+      --text: #4a1a2c;
+    }
+
+    * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      overflow: hidden;
+      color: var(--text);
+    }
+
+    /* Fondo animado de pétalos cayendo */
+    .petals-container {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .petal {
+      position: absolute;
+      background: var(--primary);
+      border-radius: 150% 0 150% 0;
+      opacity: 0.3;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    /* Tarjeta de Bienvenida */
+    .main-card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      padding: 50px 40px;
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(255, 77, 109, 0.15);
+      text-align: center;
+      max-width: 550px;
+      width: 90%;
+      border: 2px solid white;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .heart-icon {
+      font-size: 4rem;
+      margin-bottom: 25px;
+      display: inline-block;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .highlight {
+      display: block;
+      font-size: 1.8rem;
+      color: var(--primary);
+      font-weight: 800;
+      margin-top: 15px;
+      line-height: 1.2;
+    }
+
+    /* El Botón Mágico */
+    .magic-button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 20px 45px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.3);
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 30px;
+    }
+
+    .magic-button:hover {
+      background: var(--accent-dark, #c9184a);
+      transform: scale(1.08);
+      box-shadow: 0 15px 35px rgba(255, 77, 109, 0.4);
+    }
+
+    /* Animaciones */
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.15); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.15); }
+      70% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .footer-text {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: var(--muted, #6b6b6b);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="petals-container" id="petals"></div>
+
+  <div class="main-card">
+    <div class="heart-icon">🎁</div>
+    
+    <h1>
+      He preparado algo especial para ti...
+      <span class="highlight">Para la personita que yo considero muy especial cuando nos reunimos.</span>
+    </h1>
+
+    <p style="color: #6b6b6b; font-size: 1rem;">
+      Hoy es un día para celebrar el dia del amor y la amistad. <br>
+      Pulsa el botón de abajo para ver lo que hice.
+    </p>
+
+    <a href="Quisieras.html" class="magic-button">
+      Lo quisieras leer? ✨✌️
+    </a>
+
+    <a href="Deseo.html" class="magic-button">
+      Abrir mi Regalo ✨
+    </a>
+
+        <a href="Emociones.html" class="magic-button">
+      Un bloc de notas 🥸
+    </a>
+
+    <a href="https://baque2005.github.io/public-files/files/1770515861577_galaxia.html" class="magic-button">
+      Una galaxia de palabras bonitas  🌌
+    </a>
+    <div class="footer-text">Con mucho cariño... para Cricri 🤍</div>
+  </div>
+
+  <script>
+    // Generador automático de pétalos
+    const container = document.getElementById('petals');
+    const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#fb6f92', '#ff8fa3'];
+
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      
+      const size = Math.random() * 15 + 10 + 'px';
+      petal.style.width = size;
+      petal.style.height = size;
+      
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+      petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      petal.style.opacity = Math.random() * 0.5 + 0.2;
+      
+      container.appendChild(petal);
+
+      setTimeout(() => {
+        petal.remove();
+      }, 7000);
+    }
+
+    // Iniciar lluvia de pétalos
+    setInterval(createPetal, 300);
+
+    // Pequeña ráfaga inicial
+    for(let i = 0; i < 12; i++) {
+      setTimeout(createPetal, i * 100);
+    }
+  </script>
+</body>
+</html>
